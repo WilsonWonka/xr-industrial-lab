@@ -2,34 +2,59 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Laboratorio XR - Parte D: Modelo CAD Ajustado</title>
+  <title>Laboratorio XR - Parte C: Modelo Industrial</title>
   <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.1/dist/aframe-master.min.js"></script>
 </head>
 <body>
   <a-scene>
-    <!-- Carga previa de recursos -->
-    <a-assets>
-      <a-asset-item id="modeloIndustrial" src="models/modelo.glb"></a-asset-item>
-    </a-assets>
-
-    <!-- Iluminación para resaltar el modelo -->
-    <a-light type="ambient" color="#FFFFFF" intensity="0.8"></a-light>
-    <a-light type="directional" color="#FFFFFF" intensity="0.7" position="-1 4 2"></a-light>
-
-    <!-- Fondo y Piso -->
+    <!-- Fondo y Luz -->
     <a-sky color="#2C3E50"></a-sky>
+
+    <!-- PISO INDUSTRIAL -->
     <a-plane position="0 0 0" rotation="-90 0 0" width="20" height="20" color="#34495E"></a-plane>
 
-    <!-- BASE BLANCA (Pedestal) -->
-    <a-cylinder position="0 0.2 -5" radius="1.2" height="0.4" color="#FFFFFF" material="roughness: 0.3"></a-cylinder>
+    <!-- JERARQUÍA 1: TANQUE DE ALMACENAMIENTO -->
+    <a-entity id="sistema-tanque" position="-3 0 -5">
+      <!-- Base/Soporte del tanque -->
+      <a-box position="0 0.2 0" width="1.8" height="0.4" depth="1.8" color="#7F8C8D"></a-box>
+      <!-- Cuerpo del Tanque -->
+      <a-cylinder position="0 2 0" radius="0.8" height="3" color="#BDC3C7" material="metalness: 0.5"></a-cylinder>
+      <!-- Tapa superior -->
+      <a-sphere position="0 3.5 0" radius="0.8" color="#95A5A6"></a-sphere>
+      <!-- Sensores / Indicadores en la parte superior -->
+      <a-sphere position="0 4.2 0" radius="0.15" color="#E74C3C"></a-sphere> <!-- Sensor de alarma -->
+      <a-sphere position="0.5 3.8 0" radius="0.1" color="#2ECC71"></a-sphere> <!-- Sensor de presión -->
+      <!-- Tubería de salida -->
+      <a-cylinder position="0.9 1 -0.5" rotation="0 0 90" radius="0.1" height="1" color="#E67E22"></a-cylinder>
+    </a-entity>
 
-    <!-- BRAZO ROBÓTICO (Escalado y posicionado sobre la base) -->
-    <a-entity 
-      gltf-model="#modeloIndustrial" 
-      position="0 0.4 -5" 
-      scale="0.6 0.6 0.6"
-      rotation="0 0 0">
+    <!-- JERARQUÍA 2: BANDA TRANSPORTADORA -->
+    <a-entity id="banda-transportadora" position="1 0 -4" rotation="0 30 0">
+      <!-- Patas de la banda -->
+      <a-box position="-1.5 0.5 0" width="0.2" height="1" depth="0.8" color="#2C3E50"></a-box>
+      <a-box position="1.5 0.5 0" width="0.2" height="1" depth="0.8" color="#2C3E50"></a-box>
+      <!-- Estructura/Superficie de la banda -->
+      <a-box position="0 1 0" width="3.5" height="0.2" depth="1" color="#16A085"></a-box>
+      <!-- Rodillos -->
+      <a-cylinder position="-1.6 1 0" rotation="90 0 0" radius="0.12" height="0.9" color="#7F8C8D"></a-cylinder>
+      <a-cylinder position="1.6 1 0" rotation="90 0 0" radius="0.12" height="0.9" color="#7F8C8D"></a-cylinder>
+      <!-- Cajas / Productos en movimiento sobre la línea -->
+      <a-box position="-1 1.25 0" width="0.4" height="0.3" depth="0.4" color="#F39C12"></a-box>
+      <a-box position="0 1.25 0" width="0.4" height="0.3" depth="0.4" color="#F39C12"></a-box>
+      <a-box position="1 1.25 0" width="0.4" height="0.3" depth="0.4" color="#F39C12"></a-box>
+    </a-entity>
+
+    <!-- JERARQUÍA 3: ESTACIÓN DE CONTROL Y BOTONERA -->
+    <a-entity id="panel-control" position="0 0 -2">
+      <!-- Pedestal -->
+      <a-cylinder position="0 0.6 0" radius="0.1" height="1.2" color="#7F8C8D"></a-cylinder>
+      <!-- Pantalla/Consola -->
+      <a-box position="0 1.2 0" rotation="-20 0 0" width="0.8" height="0.5" depth="0.1" color="#34495E"></a-box>
+      <!-- Botones de estado -->
+      <a-sphere position="-0.2 1.25 0.05" radius="0.04" color="#2ECC71"></a-sphere>
+      <a-sphere position="0 1.25 0.05" radius="0.04" color="#F1C40F"></a-sphere>
+      <a-sphere position="0.2 1.25 0.05" radius="0.04" color="#E74C3C"></a-sphere>
     </a-entity>
   </a-scene>
 </body>
-</html>
+        </html>
